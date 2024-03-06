@@ -68,8 +68,8 @@ setValue('')
   return (
     <div  className='w-[400px] p-4 bg-white text-black shadow shadow-white rounded-lg'>
       <Image src={`http://localhost:8080/${imgLink}`} alt='user avatar'width={200} height={200} />
-        <form id="form" action={formAction} >
-              <input defaultValue={value?.image} type="file" onChange={imageLink} />
+        <form className='usersInput' id="form" action={formAction} >
+              <input defaultValue={value?.image} type="file" onChange={imageLink} />           
               <input defaultValue={value?.first_name} type="text"  placeholder='firs_name'  name='first_name' />            
               <input defaultValue={value?.last_name} type="text"  placeholder='last_name'  name='last_name' />            
               <input defaultValue={value?.age} type="number"  placeholder='age'  name='age'/>            

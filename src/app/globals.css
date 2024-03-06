@@ -28,3 +28,23 @@
     display: flex;
     align-items: center;
 }
+.usersInput{
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+.usersInput input{
+    font-size: 16px;
+    padding: 10px 15px;
+}
+.authorModal-form{
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+.authorModal-form input,textarea{
+    font-size: 16px;
+    padding: 10px 20px;
+    border: 1px solid green;
+    border-radius: 8px;
+}
