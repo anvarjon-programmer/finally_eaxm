@@ -2,3 +2,29 @@
 @tailwind components;
 @tailwind utilities;
 
+.link{
+    width: 250px;
+    height: 70px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.link:hover {
+    background-color: #2e374a;
+    border-radius: 10px;
+    width: 250px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.link-wraper{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.w-full{
+    width: 100%;
+    display: flex;
+    align-items: center;
+}

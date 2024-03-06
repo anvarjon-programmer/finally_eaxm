@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react'
 import { $api } from '../../../../api/interceptors'
 import { deleteGenre, getGenre } from '../../../../api/genre.service'
 import ModalGenre from '../ui/ModalGenre'
+import Search from '@/app/utils/Search'
 export default function Genre (){
   const [open, setOpen] = useState<boolean>(false);
 
@@ -40,6 +41,7 @@ if(e.target.id === 'container' ){
         <div id='container' onClick={close} className={open === false ? ' hidden' : '  absolute top-0 h-[100vh] flex items-center justify-center  backdrop-blur w-[100%]'}>
         <ModalGenre setOpen={setOpen} close={close} value={value} setValue={setValue}></ModalGenre>
         </div>
+        <Search/>
         <button className='px-4 py-2 rounded-lg text-white bg-green-500' type='button' onClick={addModal}>add</button>
          <div className='bg-gray-900  flex flex-wrap gap-3 p-2'>
       {

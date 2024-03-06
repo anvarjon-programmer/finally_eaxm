@@ -5,11 +5,13 @@ import ModalBook from './ui/ModalBook'
 import Link from 'next/link'
 import { getGenre } from '../../../api/genre.service'
 import { getAuthor } from '../../../api/author.service'
+import Search from '../utils/Search'
 
 export default function page() {
   const [books, setBooks]=useState([])
   const [open, setOpen]=useState(false)
   const [value, setValue]=useState('')
+  const [inputValue, setInputValue] = useState<string>("");
  
 
   const fn=async()=>{
@@ -41,13 +43,14 @@ export default function page() {
   return (
     <div className='bg-gray-900 text-white flex p-4 relative'>
     <div>
+      <Search inputValue={inputValue}  setInputValue={setInputValue} />
     <button className='px-4 py-1 bg-green-500  rounded-lg' onClick={openModal}>add Auther</button>
       <div id='container' onClick={close} className={open === false ? ' hidden' : '  absolute top-0 h-[100vh] flex items-center justify-center  backdrop-blur w-[100%]'}>
         <ModalBook setOpen={setOpen} close={close} value={value} setValue={setValue}/>
         </div>
      <div className='flex gap-4 flex-wrap'>
      {
-        books?.map((item)=>(
+        books?.filter((user: any) => inputValue ? user.first_name.toLowerCase() === inputValue.toLowerCase() : user).map((item)=>(
           <div key={item?._id}>
              <img src={`http://localhost:8080/${item?.avatar}`} className=' w-[150px] h-[150px] rounded-[50%] bg-center' alt="Author Image" />
              <div>

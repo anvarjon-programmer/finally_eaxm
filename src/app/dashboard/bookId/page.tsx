@@ -20,7 +20,7 @@ export default function BookId() {
     console.log(value)
   return (
     <div className='text-white flex justify-center items-center h-[100vh]'>
-    <div className='flex gap-4 '>
+    <div className='flex gap-4 mt-50px'>
     <img className='w-[300px]' src={value?.image} alt="" />
       <div className='flex flex-col justify-around'>
          <h1>Name: {value?.name}</h1>

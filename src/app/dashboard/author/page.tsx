@@ -3,6 +3,7 @@ import React, { useState,useEffect } from 'react'
 import { deleteAuthor, getAuthor } from '../../../../api/author.service'
 import Link from 'next/link'
 import ModalAuthor from '../ui/ModalAuthor'
+import Search from '@/app/utils/Search'
 
 export default function Author() {
   const [author,setAuthor] = useState([])
@@ -34,7 +35,9 @@ export default function Author() {
       }
   return (
     <div className='text-white p-4 relative flex flex-col gap-4'>
+
       <div>
+      <Search/>
       <button className='px-4 py-1 bg-green-500  rounded-lg' onClick={openmodal}>add Auther</button>
       </div>
       <div id='container' onClick={close} className={open === false ? ' hidden' : '  absolute top-0 h-[100vh] flex items-center justify-center  backdrop-blur w-[100%]'}>
