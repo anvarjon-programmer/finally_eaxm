@@ -13,7 +13,7 @@ export default function page() {
   const [value, setValue] = useState('');
   const [inputValue, setInputValue] = useState<string>("");
   const [currentPage, setCurrentPage] = useState(1);
-  const [itemsPerPage, setItemsPerPage] = useState(10);
+  const [itemsPerPage, setItemsPerPage] = useState(6);
 
   const fn = async () => {
     const data: any = await getBook();
@@ -61,7 +61,7 @@ export default function page() {
         <div id='container' onClick={close} className={open === false ? 'hidden' : 'absolute top-0 h-[100vh] flex items-center justify-center backdrop-blur w-[100%]'}>
           <ModalBook setOpen={setOpen} close={close} value={value} setValue={setValue} />
         </div>
-        <div className='flex gap-4 flex-wrap'>
+        <div className='flex gap-10 justify-between flex-wrap w-full'>
           {currentItems?.filter((user: any) => inputValue ? user.first_name.toLowerCase() === inputValue.toLowerCase() : user).map((item) => (
             <div key={item?._id}>
               
