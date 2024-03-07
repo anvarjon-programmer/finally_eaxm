@@ -7,7 +7,7 @@ const Search = ({inputValue, setInputValue} : {inputValue: any, setInputValue: a
     
   return (
     <div className="search-box">
-        <form style={{backgroundColor: "red"}} >
+        <form>
             <input value={inputValue} onChange={(e: any) => setInputValue(e.target.value)} type="text" placeholder="Search"/>
             <button>Search</button>
         </form>

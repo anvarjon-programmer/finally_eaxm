@@ -9,6 +9,8 @@ export default function Author() {
   const [author,setAuthor] = useState([])
   const [value,setValue] = useState('')
   const [open,setOpen] = useState(false)
+  const [currentPage, setCurrentPage] = useState(1);
+  const [itemsPerPage, setItemsPerPage] = useState(3);
   const [inputValue, setInputValue] = useState<string>("");
     const fn =async()=>{
      let data =await getAuthor()
@@ -19,6 +21,13 @@ export default function Author() {
     useEffect(()=>{
       fn()
     },[])
+
+    // Pagination Logic
+  const indexOfLastItem = currentPage * itemsPerPage;
+  const indexOfFirstItem = indexOfLastItem -                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         itemsPerPage;
+  const currentItems = author.slice(indexOfFirstItem, indexOfLastItem);
+
+  const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
 
     const handleDelete = async (id: any) => {
@@ -54,7 +63,7 @@ export default function Author() {
         </div>
      <div className='flex flex-wrap gap-8'>
      {
-        author?.filter((user: any) => inputValue ? user.title.toLowerCase() === inputValue.toLowerCase() : user).map((item)=>(
+        currentItems?.filter((user: any) => inputValue ? user.title.toLowerCase() === inputValue.toLowerCase() : user).map((item)=>(
           <div key={item?._id}>
             <div className="max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
                   <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">{item?.title}</h5>
@@ -69,6 +78,14 @@ export default function Author() {
                     ))
                   }
                 </div>
+                <div className='flex justify-center mt-7'>
+          <button onClick={() => paginate(currentPage - 1)} disabled={currentPage === 1} className='px-4 py-2 bg-blue-500 rounded-md mr-2'>
+            Previous
+          </button>
+          <button onClick={() => paginate(currentPage + 1)} disabled={indexOfLastItem >= author.length} className='px-4 py-2 bg-blue-500 rounded-md'>
+            Next
+          </button>
+        </div>
     </div>
   )
 }

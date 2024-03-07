@@ -64,26 +64,31 @@ export default function ModalBook({setOpen, close, value, setValue}:any) {
         const fn = await addBook(payload)
       }
 setValue('')
+window.location.reload()
  }
   return (
-    <div  className='w-[400px] p-4 bg-white text-black shadow shadow-white rounded-lg'>
+    <div  className='w-[800px] p-4 bg-white text-black shadow shadow-white rounded-lg'>
       <Image src={`http://localhost:8080/${imgLink}`} alt='user avatar'width={200} height={200} />
         <form className='usersInput' id="form" action={formAction} >
+              <div>
               <input defaultValue={value?.image} type="file" onChange={imageLink} />           
               <input defaultValue={value?.first_name} type="text"  placeholder='firs_name'  name='first_name' />            
               <input defaultValue={value?.last_name} type="text"  placeholder='last_name'  name='last_name' />            
-              <input defaultValue={value?.age} type="number"  placeholder='age'  name='age'/>            
-              <select defaultValue={value?.role} name="role" id="">
+              <input defaultValue={value?.age} type="number"  placeholder='age'  name='age'/>       
+                </div>     
+               <div>
+               <select defaultValue={value?.role} name="role" id="">
                 <option  hidden>Select role</option>
                 <option value='employee'>employee</option>
                 </select>            
               <input defaultValue={value?.username} type="text"  placeholder='username' name='username'  />            
               <input defaultValue={value?.password} type="password" name='password'  placeholder='password'    />            
               <input defaultValue={value?.description} type="text" name='desc' placeholder='description' />            
+               </div>
              </form>
              <div className='text-white flex justify-around mt-4'>
-                <button type='button' className='px-4 py-2 bg-yellow-500'  onClick={closeModal} >close</button>
-                <button type='submit' className='px-4 py-2 bg-green-500'   form="form" >add</button>
+                <button type='button' className='focus:outline-none text-white bg-yellow-400 hover:bg-yellow-500 focus:ring-4 focus:ring-yellow-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:focus:ring-yellow-900'  onClick={closeModal} >close</button>
+                <button type='submit' className='focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800'   form="form" >add</button>
                 </div>
     </div>
   )

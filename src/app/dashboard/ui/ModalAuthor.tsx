@@ -36,6 +36,7 @@ console.log(payload)
         addAuthor(payload)
       }
 setValue('')
+ window.location.reload();
  }
   return (
     <div  className='w-[400px] p-4 bg-white text-black shadow shadow-white rounded-lg'>
