@@ -21,13 +21,15 @@ export default function BookId() {
   return (
     <div className='text-white flex justify-center items-center h-[100vh]'>
     <div className='flex gap-4 mt-50px'>
-    <img className='w-[300px]' src={value?.image} alt="" />
+    <img className='w-[300px]' src={value?.avatar} alt="" />
       <div className='flex flex-col justify-around'>
-         <h1>Name: {value?.name}</h1>
-         <h2>Price: {value?.price}</h2>
-         <h2>Code: {value?.code}</h2>
-         <h2>genre: {value?.janr?.name}</h2>
-         <h2>Author: {value?.author?.full_name}</h2>
+         <h1>Name: {value?.first_name}</h1>
+         <h2> {value?.last_name}</h2>
+         <h2>{value?.age}</h2>
+         <h2>genre: {value?.role}</h2>
+         <h2>name: {value?.username}</h2>
+         <h2>{value?.password}</h2>
+         <h2>{value?.description}</h2>
       </div>
     </div>
      </div>

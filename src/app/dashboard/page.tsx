@@ -6,6 +6,7 @@ import Link from 'next/link';
 import { getGenre } from '../../../api/genre.service';
 import { getAuthor } from '../../../api/author.service';
 import Search from '../utils/Search';
+import { getCookie } from '../../../helpers/auth.helper';
 
 export default function page() {
   const [books, setBooks] = useState([]);
@@ -14,6 +15,7 @@ export default function page() {
   const [inputValue, setInputValue] = useState<string>("");
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage, setItemsPerPage] = useState(6);
+  const [isAdmin, setIsAdmin] = useState("")
 
   const fn = async () => {
     const data: any = await getBook();
@@ -23,6 +25,12 @@ export default function page() {
   useEffect(() => {
     fn();
   }, []);
+
+  useEffect(() => {
+    const accessToken: any = getCookie()
+    const a = JSON.parse(atob(accessToken?.split(".")[1]))
+    setIsAdmin(a.user.role)
+  }, [])
 
   const handleDelete = async (id: any) => {
     const data = await deleteBook(id);
@@ -46,7 +54,7 @@ export default function page() {
   // Pagination Logic
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem -                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         itemsPerPage;
-  const currentItems = books.slice(indexOfFirstItem, indexOfLastItem);
+  const currentItems = books?.filter((user: any) => inputValue ? user.first_name.toLowerCase() === inputValue.toLowerCase() : user).slice(indexOfFirstItem, indexOfLastItem);
 
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
@@ -55,14 +63,21 @@ export default function page() {
       <Search inputValue={inputValue} setInputValue={setInputValue} />
       <div className='bg-gray-900 text-white flex p-4 relative'>
       <div>
-        <button className='px-4 py-1 bg-green-500 rounded-lg mb-7' onClick={openModal}>
+        {
+          isAdmin === "admin" &&
+          <>
+                    <button className='px-4 py-1 bg-green-500 rounded-lg mb-7' onClick={openModal}>
           Add User
         </button>
         <div id='container' onClick={close} className={open === false ? 'hidden' : 'absolute top-0 h-[100vh] flex items-center justify-center backdrop-blur w-[100%]'}>
           <ModalBook setOpen={setOpen} close={close} value={value} setValue={setValue} />
         </div>
+
+          </>
+
+        }
         <div className='flex gap-10 justify-between flex-wrap w-full'>
-          {currentItems?.filter((user: any) => inputValue ? user.first_name.toLowerCase() === inputValue.toLowerCase() : user).map((item) => (
+          {currentItems?.map((item) => (
             <div key={item?._id}>
               
                 <div className=" w-[350px] bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
@@ -96,7 +111,7 @@ export default function page() {
           <button onClick={() => paginate(currentPage - 1)} disabled={currentPage === 1} className='px-4 py-2 bg-blue-500 rounded-md mr-2'>
             Previous
           </button>
-          <button onClick={() => paginate(currentPage + 1)} disabled={indexOfLastItem >= books.length} className='px-4 py-2 bg-blue-500 rounded-md'>
+          <button onClick={() => paginate(currentPage + 1)} disabled={indexOfLastItem >= books?.length} className='px-4 py-2 bg-blue-500 rounded-md'>
             Next
           </button>
         </div>
